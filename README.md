@@ -1,1 +1,1 @@
-Custom form with server-side and client-side validation
+Register form with server-side and client-side validation
