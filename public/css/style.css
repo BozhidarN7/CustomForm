@@ -21,3 +21,8 @@
     margin: 15px auto;
     width: 70px;
 }
+
+.error {
+    color: red;
+    margin: 0 auto;
+}

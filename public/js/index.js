@@ -22,12 +22,23 @@ registerButton.addEventListener('click', async (e) => {
     location.assign('/');
 });
 
+const usernameForbiddenSymbols = ['$', '/', '<', '>', '%', '&', '*'];
+
 usernameField.addEventListener('input', (e) => {
-    usernameField.textContent = 'Must be at least 20 characters';
     if (usernameField.validity.valid) {
         usernameError.textContent = '';
     } else {
         showError();
+    }
+    const username = usernameField.value;
+    if (username.length > 20) {
+        usernameError.textContent =
+            'Username must be at most 20 characters long';
+    }
+    if (checkForForbiddenSymbols(username)) {
+        usernameError.textContent = `Username can not include ${usernameForbiddenSymbols.join(
+            ' '
+        )}`;
     }
 });
 
@@ -39,4 +50,13 @@ const showError = function () {
         usernameError.textContent =
             'Username must be at least 3 characters long';
     }
+};
+
+const checkForForbiddenSymbols = function (username) {
+    usernameForbiddenSymbols.forEach((s) => {
+        if (username.includes(s)) {
+            return true;
+        }
+    });
+    return false;
 };
