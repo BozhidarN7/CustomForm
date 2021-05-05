@@ -2,6 +2,7 @@ import '@babel/polyfill';
 import axios from 'axios';
 
 import './validators/email';
+import './validators/password';
 
 const usernameField = document.querySelector('#username');
 const usernameError = document.querySelector('#usernameError');

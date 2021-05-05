@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .form-container {
     display: flex;
     margin: 0 auto;
@@ -13,7 +17,7 @@
     padding: 5px;
     width: 200px;
     border: none;
-    border-bottom: 1px solid #111;
+    border-bottom: 2px solid #111;
     outline: none;
 }
 
@@ -25,4 +29,24 @@
 .error {
     color: red;
     margin: 0 auto;
+}
+
+.strength-meter {
+    position: relative;
+    margin: 5px auto;
+    width: 200px;
+    height: 1rem;
+    border: 3px solid grey;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.strength-meter::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: calc(1% * var(--strength, 0));
+    background-color: red;
+    transition: width 200ms;
 }
