@@ -1,6 +1,8 @@
 import '@babel/polyfill';
 import axios from 'axios';
 
+import './validators/email';
+
 const usernameField = document.querySelector('#username');
 const usernameError = document.querySelector('#usernameError');
 const registerButton = document.querySelector('#register');
