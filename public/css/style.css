@@ -20,7 +20,13 @@ i {
     margin: 0 auto;
 }
 
-.form-container input {
+.field-container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
     margin: 5px auto;
     padding: 5px;
     width: 200px;

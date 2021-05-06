@@ -1,46 +1,50 @@
 <form novalidate class="form-container" method="POST">
     <h2>Register</h2>
-    <input
-        id="username"
-        type="text"
-        name="username"
-        required
-        placeholder="Username"
-        minlength="3"
-    />
-    <span class="error" id="usernameError"></span>
-
-    <input
-        id="email"
-        type="email"
-        required
-        placeholder="Email"
-        name="email"
-        required
-    />
-    <span class="error" id="emailError"></span>
-
-    <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Password"
-        required
-    />
-    <i class="far fa-eye" id="togglePassword"></i>
-    <span class="error" id="passwordError"></span>
-    <div class="hidden" id="strengthMeter"></div>
-    <div id="reasons" class="reasons"></div>
-
-    <input
-        type="password"
-        id="repeatPassword"
-        name="repeatPassword"
-        placeholder="Repeat password"
-        required
-    />
-    <i class="far fa-eye" id="toggleRepeatPassword"></i>
-    <span class="error" id="repeatPasswordError"></span>
-
+    <div class="field-container">
+        <input
+            id="username"
+            type="text"
+            name="username"
+            required
+            placeholder="Username"
+            minlength="3"
+        />
+        <span class="error" id="usernameError"></span>
+    </div>
+    <div class="field-container">
+        <input
+            id="email"
+            type="email"
+            required
+            placeholder="Email"
+            name="email"
+            required
+        />
+        <span class="error" id="emailError"></span>
+    </div>
+    <div class="field-container">
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            required
+        />
+        <i class="far fa-eye" id="togglePassword"></i>
+        <span class="error" id="passwordError"></span>
+        <div class="hidden" id="strengthMeter"></div>
+        <div id="reasons" class="reasons"></div>
+    </div>
+    <div class="field-container">
+        <input
+            type="password"
+            id="repeatPassword"
+            name="repeatPassword"
+            placeholder="Repeat password"
+            required
+        />
+        <i class="far fa-eye" id="toggleRepeatPassword"></i>
+        <span class="error" id="repeatPasswordError"></span>
+    </div>
     <button id="register" type="submit">Register</button>
 </form>
