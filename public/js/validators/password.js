@@ -6,13 +6,44 @@ const strengthMeter = document.querySelector('#strengthMeter');
 const reasonsContainer = document.querySelector('#reasons');
 
 passwordField.addEventListener('input', (e) => {
+    showStrengthMeter();
     if (passwordField.validity.valid) {
         passwordError.textContent = '';
     } else {
-        showError();
+        showError(passwordError, 'You must enter a password');
     }
+
     updateStrengthMeter();
+
+    if (passwordsMatch()) {
+        repeatPasswordError.textContent = '';
+    } else {
+        repeatPasswordError.textContent = 'Passwords are not same';
+    }
 });
+
+repeatPasswordField.addEventListener('input', (e) => {
+    if (repeatPasswordField.validity.valid) {
+        repeatPasswordError.textContent = '';
+    } else {
+        showError(repeatPasswordError, 'You must repeat your password');
+    }
+
+    if (passwordsMatch()) {
+        repeatPasswordError.textContent = '';
+    } else {
+        repeatPasswordError.textContent = 'Passwords are not same';
+    }
+});
+
+const passwordsMatch = function () {
+    const password = passwordField.value;
+    const repeatPassword = repeatPasswordField.value;
+    if (password !== repeatPassword) {
+        return false;
+    }
+    return true;
+};
 
 const updateStrengthMeter = function () {
     const weaknesses = calculatePasswordStrength(passwordField.value);
@@ -105,8 +136,12 @@ const repeatCharacterWeakness = function (password) {
     }
 };
 
-const showError = function () {
+const showError = function (field, message) {
     if (passwordField.validity.valueMissing) {
-        passwordError.textContent = 'You must enter a password';
+        field.textContent = message;
     }
+};
+const showStrengthMeter = function () {
+    strengthMeter.classList.remove('hidden');
+    strengthMeter.classList.add('strength-meter');
 };

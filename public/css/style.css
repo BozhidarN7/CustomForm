@@ -12,6 +12,10 @@
     flex-direction: column;
 }
 
+.form-container h2 {
+    margin: 0 auto;
+}
+
 .form-container input {
     margin: 5px auto;
     padding: 5px;
@@ -49,4 +53,13 @@
     width: calc(1% * var(--strength, 0));
     background-color: red;
     transition: width 200ms;
+}
+
+.reasons {
+    margin: 0 auto;
+    color: red;
+}
+
+.hidden {
+    visibility: hidden;
 }

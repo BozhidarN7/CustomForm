@@ -8486,14 +8486,46 @@ var repeatPasswordError = document.querySelector('#repeatPasswordError');
 var strengthMeter = document.querySelector('#strengthMeter');
 var reasonsContainer = document.querySelector('#reasons');
 passwordField.addEventListener('input', function (e) {
+  showStrengthMeter();
+
   if (passwordField.validity.valid) {
     passwordError.textContent = '';
   } else {
-    showError();
+    showError(passwordError, 'You must enter a password');
   }
 
   updateStrengthMeter();
+
+  if (passwordsMatch()) {
+    repeatPasswordError.textContent = '';
+  } else {
+    repeatPasswordError.textContent = 'Passwords are not same';
+  }
 });
+repeatPasswordField.addEventListener('input', function (e) {
+  if (repeatPasswordField.validity.valid) {
+    repeatPasswordError.textContent = '';
+  } else {
+    showError(repeatPasswordError, 'You must repeat your password');
+  }
+
+  if (passwordsMatch()) {
+    repeatPasswordError.textContent = '';
+  } else {
+    repeatPasswordError.textContent = 'Passwords are not same';
+  }
+});
+
+var passwordsMatch = function passwordsMatch() {
+  var password = passwordField.value;
+  var repeatPassword = repeatPasswordField.value;
+
+  if (password !== repeatPassword) {
+    return false;
+  }
+
+  return true;
+};
 
 var updateStrengthMeter = function updateStrengthMeter() {
   var weaknesses = calculatePasswordStrength(passwordField.value);
@@ -8583,10 +8615,15 @@ var repeatCharacterWeakness = function repeatCharacterWeakness(password) {
   }
 };
 
-var showError = function showError() {
+var showError = function showError(field, message) {
   if (passwordField.validity.valueMissing) {
-    passwordError.textContent = 'You must enter a password';
+    field.textContent = message;
   }
+};
+
+var showStrengthMeter = function showStrengthMeter() {
+  strengthMeter.classList.remove('hidden');
+  strengthMeter.classList.add('strength-meter');
 };
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
@@ -8975,7 +9012,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51105" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50499" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
