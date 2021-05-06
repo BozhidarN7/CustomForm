@@ -11,6 +11,10 @@
     padding: 1em;
     flex-direction: column;
 }
+i {
+    margin-left: 310px;
+    margin-top: -23px;
+}
 
 .form-container h2 {
     margin: 0 auto;
@@ -23,6 +27,11 @@
     border: none;
     border-bottom: 2px solid #111;
     outline: none;
+}
+
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+    display: none;
 }
 
 .form-container button {

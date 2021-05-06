@@ -8546,6 +8546,14 @@ var passwordError = document.querySelector('#passwordError');
 var repeatPasswordError = document.querySelector('#repeatPasswordError');
 var strengthMeter = document.querySelector('#strengthMeter');
 var reasonsContainer = document.querySelector('#reasons');
+var togglePassword = document.querySelector('#togglePassword');
+var toggleRepeatPassword = document.querySelector('#toggleRepeatPassword');
+togglePassword.addEventListener('click', function () {
+  togglePasswordVisibility(passwordField, togglePassword);
+});
+toggleRepeatPassword.addEventListener('click', function () {
+  togglePasswordVisibility(repeatPasswordField, toggleRepeatPassword);
+});
 passwordField.addEventListener('input', function (e) {
   showStrengthMeter();
 
@@ -8563,6 +8571,13 @@ passwordField.addEventListener('input', function (e) {
     repeatPasswordError.textContent = 'Passwords are not same';
   }
 });
+
+var togglePasswordVisibility = function togglePasswordVisibility(field, button) {
+  var type = field.getAttribute('type') === 'password' ? 'text' : 'password';
+  field.setAttribute('type', type);
+  button.classList.toggle('fa-eye-slash');
+};
+
 repeatPasswordField.addEventListener('input', function (e) {
   if (repeatPasswordField.validity.valid) {
     repeatPasswordError.textContent = '';

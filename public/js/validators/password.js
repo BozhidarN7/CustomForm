@@ -4,6 +4,16 @@ const passwordError = document.querySelector('#passwordError');
 const repeatPasswordError = document.querySelector('#repeatPasswordError');
 const strengthMeter = document.querySelector('#strengthMeter');
 const reasonsContainer = document.querySelector('#reasons');
+const togglePassword = document.querySelector('#togglePassword');
+const toggleRepeatPassword = document.querySelector('#toggleRepeatPassword');
+
+togglePassword.addEventListener('click', () => {
+    togglePasswordVisibility(passwordField, togglePassword);
+});
+
+toggleRepeatPassword.addEventListener('click', () => {
+    togglePasswordVisibility(repeatPasswordField, toggleRepeatPassword);
+});
 
 passwordField.addEventListener('input', (e) => {
     showStrengthMeter();
@@ -21,6 +31,13 @@ passwordField.addEventListener('input', (e) => {
         repeatPasswordError.textContent = 'Passwords are not same';
     }
 });
+
+const togglePasswordVisibility = function (field, button) {
+    const type =
+        field.getAttribute('type') === 'password' ? 'text' : 'password';
+    field.setAttribute('type', type);
+    button.classList.toggle('fa-eye-slash');
+};
 
 repeatPasswordField.addEventListener('input', (e) => {
     if (repeatPasswordField.validity.valid) {
