@@ -21,6 +21,8 @@ i {
 }
 
 .field-container {
+    width: 100%;
+    position: relative;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -43,6 +45,13 @@ input[type='password']::-ms-clear {
 .form-container button {
     margin: 15px auto;
     width: 70px;
+}
+
+abbr {
+    position: absolute;
+    left: 120px;
+    top: 5px;
+    color: red;
 }
 
 .error {
