@@ -1,8 +1,17 @@
+import axios from 'axios';
+
 const usernameField = document.querySelector('#username');
 const usernameError = document.querySelector('#usernameError');
 const registerButton = document.querySelector('#register');
 
 const usernameForbiddenSymbols = ['$', '/', '<', '>', '%', '&', '*'];
+let usernames = [];
+
+(function () {
+    axios.get('http://127.0.0.1:3000/users/getAll').then((data) => {
+        usernames = data.data.users.map((user) => user.username);
+    });
+})();
 
 usernameField.addEventListener('input', (e) => {
     if (usernameField.validity.valid) {
@@ -10,7 +19,7 @@ usernameField.addEventListener('input', (e) => {
     } else {
         showError();
     }
-    const username = usernameField.value;
+    const username = usernameField.value.trim();
     if (username.length > 20) {
         usernameError.textContent =
             'Username must be at most 20 characters long';
@@ -19,6 +28,9 @@ usernameField.addEventListener('input', (e) => {
         usernameError.textContent = `Username can not include ${usernameForbiddenSymbols.join(
             ' '
         )}`;
+    }
+    if (usernames.includes(username)) {
+        usernameError.textContent = 'Username already exists';
     }
 });
 

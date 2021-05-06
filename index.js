@@ -6,6 +6,7 @@ const { PORT } = require('./config/config');
 const expressConfig = require('./config/express');
 const mongooseConfig = require('./config/mongoose');
 const registerController = require('./controllers/registerController');
+const User = require('./models/userModel');
 
 expressConfig(app);
 mongooseConfig();
@@ -23,6 +24,14 @@ app.post('/', (req, res) => {
         .catch((err) => {
             console.log(err);
         });
+});
+
+app.get('/users/getAll', async (req, res) => {
+    const users = await User.find({}, { username: 1, _id: 0 });
+    res.status(200).json({
+        status: 'success',
+        users,
+    });
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

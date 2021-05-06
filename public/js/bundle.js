@@ -8452,10 +8452,26 @@ module.exports.default = axios;
 },{"./utils":"../../node_modules/axios/lib/utils.js","./helpers/bind":"../../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../../node_modules/axios/lib/helpers/isAxiosError.js"}],"../../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 },{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"validators/username.js":[function(require,module,exports) {
+"use strict";
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var usernameField = document.querySelector('#username');
 var usernameError = document.querySelector('#usernameError');
 var registerButton = document.querySelector('#register');
 var usernameForbiddenSymbols = ['$', '/', '<', '>', '%', '&', '*'];
+var usernames = [];
+
+(function () {
+  _axios.default.get('http://127.0.0.1:3000/users/getAll').then(function (data) {
+    usernames = data.data.users.map(function (user) {
+      return user.username;
+    });
+  });
+})();
+
 usernameField.addEventListener('input', function (e) {
   if (usernameField.validity.valid) {
     usernameError.textContent = '';
@@ -8463,7 +8479,7 @@ usernameField.addEventListener('input', function (e) {
     showError();
   }
 
-  var username = usernameField.value;
+  var username = usernameField.value.trim();
 
   if (username.length > 20) {
     usernameError.textContent = 'Username must be at most 20 characters long';
@@ -8471,6 +8487,10 @@ usernameField.addEventListener('input', function (e) {
 
   if (checkForForbiddenSymbols(username)) {
     usernameError.textContent = "Username can not include ".concat(usernameForbiddenSymbols.join(' '));
+  }
+
+  if (usernames.includes(username)) {
+    usernameError.textContent = 'Username already exists';
   }
 });
 
@@ -8492,7 +8512,7 @@ var checkForForbiddenSymbols = function checkForForbiddenSymbols(username) {
   });
   return false;
 };
-},{}],"validators/email.js":[function(require,module,exports) {
+},{"axios":"../../node_modules/axios/index.js"}],"validators/email.js":[function(require,module,exports) {
 var emailField = document.querySelector('#email');
 var emailError = document.querySelector('#emailError');
 emailField.addEventListener('input', function (e) {
