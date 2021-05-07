@@ -8982,35 +8982,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 registerButton.addEventListener('click', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-    var username;
+    var username, email, password;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             username = usernameField.value;
+            email = emailField.value;
+            password = passwordField.value;
 
             if (!(username.length > 20)) {
-              _context.next = 4;
+              _context.next = 6;
               break;
             }
 
             console.log('Must be less than 20');
             return _context.abrupt("return");
 
-          case 4:
-            _context.next = 6;
+          case 6:
+            _context.next = 8;
             return (0, _axios.default)({
               method: 'post',
               url: 'http://127.0.0.1:3000',
               data: {
-                username: username
+                username: username,
+                email: email,
+                password: password
               }
             });
 
-          case 6:
+          case 8:
             location.assign('/');
 
-          case 7:
+          case 9:
           case "end":
             return _context.stop();
         }
@@ -9050,7 +9054,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50499" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49542" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
