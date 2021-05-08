@@ -1,16 +1,20 @@
 import '@babel/polyfill';
 import axios from 'axios';
 
-import './validators/username';
-import './validators/email';
-import './validators/password';
+import * as usernameValidator from './validators/username';
+import * as emailValidator from './validators/email';
+import * as passwordValidator from './validators/password';
 
+console.log(usernameValidator);
+
+const registerButton = document.querySelector('#register');
 registerButton.addEventListener('click', async (e) => {
-    const username = usernameField.value;
-    const email = emailField.value;
-    const password = passwordField.value;
-    if (username.length > 20) {
-        console.log('Must be less than 20');
+    const username = usernameValidator.usernameField.value;
+    const email = emailValidator.emailField.value;
+    const password = passwordValidator.passwordField.value;
+
+    if (checkForError()) {
+        console.log('test');
         return;
     }
 
@@ -25,3 +29,11 @@ registerButton.addEventListener('click', async (e) => {
     });
     location.assign('/');
 });
+
+const checkForError = function () {
+    if (usernameError.textContent !== '') {
+        return true;
+    }
+
+    return false;
+};

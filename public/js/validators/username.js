@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const usernameField = document.querySelector('#username');
 const usernameError = document.querySelector('#usernameError');
-const registerButton = document.querySelector('#register');
 
 const usernameForbiddenSymbols = ['$', '/', '<', '>', '%', '&', '*'];
 let usernames = [];
