@@ -162,3 +162,10 @@ const showStrengthMeter = function () {
     strengthMeter.classList.remove('hidden');
     strengthMeter.classList.add('strength-meter');
 };
+
+export {
+    passwordField,
+    passwordError,
+    repeatPasswordField,
+    repeatPasswordError,
+};

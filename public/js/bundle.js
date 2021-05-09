@@ -8454,12 +8454,19 @@ module.exports = require('./lib/axios');
 },{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"validators/username.js":[function(require,module,exports) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.usernameError = exports.usernameField = void 0;
+
 var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var usernameField = document.querySelector('#username');
+exports.usernameField = usernameField;
 var usernameError = document.querySelector('#usernameError');
+exports.usernameError = usernameError;
 var usernameForbiddenSymbols = ['$', '/', '<', '>', '%', '&', '*'];
 var usernames = [];
 
@@ -8512,8 +8519,16 @@ var checkForForbiddenSymbols = function checkForForbiddenSymbols(username) {
   return false;
 };
 },{"axios":"../../node_modules/axios/index.js"}],"validators/email.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.emailError = exports.emailField = void 0;
 var emailField = document.querySelector('#email');
+exports.emailField = emailField;
 var emailError = document.querySelector('#emailError');
+exports.emailError = emailError;
 emailField.addEventListener('input', function (e) {
   var email = emailField.value;
 
@@ -8539,10 +8554,20 @@ var isValidEmail = function isValidEmail(email) {
   return pattern.test(email);
 };
 },{}],"validators/password.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.repeatPasswordError = exports.repeatPasswordField = exports.passwordError = exports.passwordField = void 0;
 var passwordField = document.querySelector('#password');
+exports.passwordField = passwordField;
 var repeatPasswordField = document.querySelector('#repeatPassword');
+exports.repeatPasswordField = repeatPasswordField;
 var passwordError = document.querySelector('#passwordError');
+exports.passwordError = passwordError;
 var repeatPasswordError = document.querySelector('#repeatPasswordError');
+exports.repeatPasswordError = repeatPasswordError;
 var strengthMeter = document.querySelector('#strengthMeter');
 var reasonsContainer = document.querySelector('#reasons');
 var togglePassword = document.querySelector('#togglePassword');
@@ -8983,7 +9008,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-console.log(usernameValidator);
 var registerButton = document.querySelector('#register');
 registerButton.addEventListener('click', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
@@ -9033,7 +9057,47 @@ registerButton.addEventListener('click', /*#__PURE__*/function () {
 }());
 
 var checkForError = function checkForError() {
-  if (usernameError.textContent !== '') {
+  if (checkForEmptyField()) {
+    return true;
+  }
+
+  if (usernameValidator.usernameError.textContent !== '') {
+    usernameValidator.usernameField.focus();
+    return true;
+  }
+
+  if (emailValidator.emailError.textContent !== '') {
+    emailValidator.emailField.focus();
+    return true;
+  }
+
+  if (passwordValidator.passwordError.textContent !== '') {
+    passwordValidator.passwordField.focus();
+    return true;
+  }
+
+  if (passwordValidator.repeatPasswordError.textContent !== '') {
+    passwordValidator.repeatPasswordField.focus();
+    return true;
+  }
+
+  return false;
+};
+
+var checkForEmptyField = function checkForEmptyField() {
+  if (usernameValidator.usernameField.value === '') {
+    return true;
+  }
+
+  if (emailValidator.emailField.value === '') {
+    return true;
+  }
+
+  if (passwordValidator.passwordField.value === '') {
+    return true;
+  }
+
+  if (passwordValidator.repeatPasswordField.value === '') {
     return true;
   }
 
@@ -9067,7 +9131,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58890" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50261" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

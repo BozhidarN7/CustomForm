@@ -51,3 +51,5 @@ const checkForForbiddenSymbols = function (username) {
     });
     return false;
 };
+
+export { usernameField, usernameError };
