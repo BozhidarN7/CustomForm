@@ -19,7 +19,12 @@ app.post('/', (req, res) => {
     registerController
         .register(req.body)
         .then((user) => {
-            res.redirect('/');
+            res.status(200).json({
+                status: 'success',
+                data: {
+                    user,
+                },
+            });
         })
         .catch((err) => {
             console.log(err);

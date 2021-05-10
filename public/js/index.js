@@ -11,25 +11,36 @@ const registerButton = document.querySelector('#register');
 let msg = '';
 
 registerButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+
     const username = usernameValidator.usernameField.value;
     const email = emailValidator.emailField.value;
     const password = passwordValidator.passwordField.value;
 
-    if (checkForError()) {
-        showAlert('error', msg, 2);
-        return;
+    // if (checkForError()) {
+    //     showAlert('error', msg, 2);
+    //     return;
+    // }
+    try {
+        const res = await axios({
+            method: 'post',
+            url: 'http://127.0.0.1:3000',
+            data: {
+                username,
+                email,
+                password,
+            },
+        });
+        if (res.data.status === 'success') {
+            showAlert('success', 'Registration successful!');
+        }
+        window.setTimeout(() => {
+            location.assign('/');
+        }, 1500);
+    } catch (err) {
+        console.log(err);
+        // showAlert('error', err);
     }
-
-    await axios({
-        method: 'post',
-        url: 'http://127.0.0.1:3000',
-        data: {
-            username,
-            email,
-            password,
-        },
-    });
-    location.assign('/');
 });
 
 const checkForError = function () {

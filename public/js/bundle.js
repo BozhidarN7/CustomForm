@@ -9038,25 +9038,21 @@ var registerButton = document.querySelector('#register');
 var msg = '';
 registerButton.addEventListener('click', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-    var username, email, password;
+    var username, email, password, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            e.preventDefault();
             username = usernameValidator.usernameField.value;
             email = emailValidator.emailField.value;
-            password = passwordValidator.passwordField.value;
+            password = passwordValidator.passwordField.value; // if (checkForError()) {
+            //     showAlert('error', msg, 2);
+            //     return;
+            // }
 
-            if (!checkForError()) {
-              _context.next = 6;
-              break;
-            }
-
-            (0, _alerts.showAlert)('error', msg, 2);
-            return _context.abrupt("return");
-
-          case 6:
-            _context.next = 8;
+            _context.prev = 4;
+            _context.next = 7;
             return (0, _axios.default)({
               method: 'post',
               url: 'http://127.0.0.1:3000',
@@ -9067,15 +9063,30 @@ registerButton.addEventListener('click', /*#__PURE__*/function () {
               }
             });
 
-          case 8:
-            location.assign('/');
+          case 7:
+            res = _context.sent;
 
-          case 9:
+            if (res.data.status === 'success') {
+              (0, _alerts.showAlert)('success', 'Registration successful!');
+            }
+
+            window.setTimeout(function () {
+              location.assign('/');
+            }, 1500);
+            _context.next = 15;
+            break;
+
+          case 12:
+            _context.prev = 12;
+            _context.t0 = _context["catch"](4);
+            console.log(_context.t0); // showAlert('error', err);
+
+          case 15:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[4, 12]]);
   }));
 
   return function (_x) {
@@ -9170,7 +9181,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50261" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58117" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
