@@ -5,6 +5,7 @@ module.exports = () => {
     mongoose.connect(dbURL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex: true,
     });
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Connection error.'));
