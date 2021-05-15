@@ -4,13 +4,14 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'You must enter a username'],
-        unique: [true, 'Username already exists'],
+        unique: true,
         minlength: [3, 'Username must be at leat 3 characters long'],
         maxlength: [20, 'Username must be at most 20 characters long'],
     },
     email: {
         type: String,
         required: [true, 'You must enter an email'],
+        unique: true,
         validate: {
             validator: function (email) {
                 return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
