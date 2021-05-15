@@ -9073,15 +9073,16 @@ registerButton.addEventListener('click', /*#__PURE__*/function () {
             window.setTimeout(function () {
               location.assign('/');
             }, 1500);
-            _context.next = 15;
+            _context.next = 16;
             break;
 
           case 12:
             _context.prev = 12;
             _context.t0 = _context["catch"](4);
-            console.log(_context.t0); // showAlert('error', err);
+            console.log(_context.t0.response.data.message);
+            (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
@@ -9181,7 +9182,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60695" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51140" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
