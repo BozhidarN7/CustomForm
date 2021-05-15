@@ -9,6 +9,13 @@ module.exports = (err, req, res, next) => {
             err.status,
             err.errors.username.message
         );
+    } else if (err.errors.email) {
+        sendErrorResponse(
+            res,
+            err.statusCode,
+            err.status,
+            err.errors.email.message
+        );
     } else {
         sendErrorResponse(
             res,
@@ -20,7 +27,6 @@ module.exports = (err, req, res, next) => {
 };
 
 const sendErrorResponse = function (res, statusCode, status, message) {
-    console.log(message);
     res.status(statusCode).json({
         status,
         message,

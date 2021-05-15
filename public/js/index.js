@@ -38,7 +38,6 @@ registerButton.addEventListener('click', async (e) => {
             location.assign('/');
         }, 1500);
     } catch (err) {
-        console.log(err.response.data.message);
         showAlert('error', err.response.data.message);
     }
 });

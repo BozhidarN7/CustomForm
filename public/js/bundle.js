@@ -9073,16 +9073,15 @@ registerButton.addEventListener('click', /*#__PURE__*/function () {
             window.setTimeout(function () {
               location.assign('/');
             }, 1500);
-            _context.next = 16;
+            _context.next = 15;
             break;
 
           case 12:
             _context.prev = 12;
             _context.t0 = _context["catch"](4);
-            console.log(_context.t0.response.data.message);
             (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
-          case 16:
+          case 15:
           case "end":
             return _context.stop();
         }
