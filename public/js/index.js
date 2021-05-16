@@ -16,6 +16,7 @@ registerButton.addEventListener('click', async (e) => {
     const username = usernameValidator.usernameField.value;
     const email = emailValidator.emailField.value;
     const password = passwordValidator.passwordField.value;
+    const repeatPassword = passwordValidator.repeatPasswordField.value;
 
     // if (checkForError()) {
     //     showAlert('error', msg, 2);
@@ -29,6 +30,7 @@ registerButton.addEventListener('click', async (e) => {
                 username,
                 email,
                 password,
+                repeatPassword,
             },
         });
         if (res.data.status === 'success') {

@@ -7,12 +7,13 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.register = catchAsync(async (req, res, next) => {
     trimData(req.body);
-    const salt = await bcrypt.genSalt(SALT_VALUE);
-    const hash = await bcrypt.hash(req.body.password, salt);
-    req.body.password = hash;
 
     const hasError = await validateData(req.body, next);
     if (hasError) return;
+
+    const salt = await bcrypt.genSalt(SALT_VALUE);
+    const hash = await bcrypt.hash(req.body.password, salt);
+    req.body.password = hash;
 
     const user = await User.create(req.body);
 
@@ -29,6 +30,12 @@ const validateData = async (data, next) => {
     if (isUnieque) {
         next(new AppError('Username with that email already exists', 500));
         return true;
+    } else if (!isPasswordSpecified(data)) {
+        throw new AppError('You must enter a password', 500);
+    } else if (!isReapeatPasswordSpecified(data)) {
+        throw new AppError('You must repeat your password');
+    } else if (!arePasswordsSame(data)) {
+        throw new AppError('Passwords are different', 500);
     }
 
     return false;
@@ -44,6 +51,28 @@ const isEmailUnique = async (email) => {
     }
 
     return false;
+};
+
+const arePasswordsSame = (data) => {
+    if (data.password === data.repeatPassword) {
+        return true;
+    }
+    return false;
+};
+
+const isPasswordSpecified = (data) => {
+    console.log(data);
+    if (data.password === '') {
+        return false;
+    }
+    return true;
+};
+
+const isReapeatPasswordSpecified = (data) => {
+    if (data.repeatPassword === '') {
+        return false;
+    }
+    return true;
 };
 
 const trimData = (data) => {

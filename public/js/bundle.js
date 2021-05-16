@@ -9038,7 +9038,7 @@ var registerButton = document.querySelector('#register');
 var msg = '';
 registerButton.addEventListener('click', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-    var username, email, password, res;
+    var username, email, password, repeatPassword, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -9046,24 +9046,26 @@ registerButton.addEventListener('click', /*#__PURE__*/function () {
             e.preventDefault();
             username = usernameValidator.usernameField.value;
             email = emailValidator.emailField.value;
-            password = passwordValidator.passwordField.value; // if (checkForError()) {
+            password = passwordValidator.passwordField.value;
+            repeatPassword = passwordValidator.repeatPasswordField.value; // if (checkForError()) {
             //     showAlert('error', msg, 2);
             //     return;
             // }
 
-            _context.prev = 4;
-            _context.next = 7;
+            _context.prev = 5;
+            _context.next = 8;
             return (0, _axios.default)({
               method: 'post',
               url: 'http://127.0.0.1:3000',
               data: {
                 username: username,
                 email: email,
-                password: password
+                password: password,
+                repeatPassword: repeatPassword
               }
             });
 
-          case 7:
+          case 8:
             res = _context.sent;
 
             if (res.data.status === 'success') {
@@ -9073,20 +9075,20 @@ registerButton.addEventListener('click', /*#__PURE__*/function () {
             window.setTimeout(function () {
               location.assign('/');
             }, 1500);
-            _context.next = 15;
+            _context.next = 16;
             break;
 
-          case 12:
-            _context.prev = 12;
-            _context.t0 = _context["catch"](4);
+          case 13:
+            _context.prev = 13;
+            _context.t0 = _context["catch"](5);
             (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[4, 12]]);
+    }, _callee, null, [[5, 13]]);
   }));
 
   return function (_x) {
