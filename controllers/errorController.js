@@ -6,7 +6,7 @@ module.exports = (err, req, res, next) => {
         const value = err.message.match(/(["'])(\\?.)*?\1/)[0];
         const message = `Duplicate field value: ${value}. Please use another value!`;
         sendErrorResponse(res, err.statusCode, err.status, message);
-    } else if (err.erros && err.errors.username) {
+    } else if (err.errors && err.errors.username) {
         sendErrorResponse(
             res,
             err.statusCode,
@@ -20,8 +20,10 @@ module.exports = (err, req, res, next) => {
             err.status,
             err.errors.email.message
         );
-    } else {
+    } else if (err.isOperational) {
         sendErrorResponse(res, err.statusCode, err.status, err.message);
+    } else {
+        console.log(err);
     }
 };
 
