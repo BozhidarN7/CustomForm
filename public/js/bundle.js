@@ -8471,7 +8471,7 @@ var usernameForbiddenSymbols = ['$', '/', '<', '>', '%', '&', '*'];
 var usernames = [];
 
 (function () {
-  _axios.default.get('http://127.0.0.1:3000/users/getAll').then(function (data) {
+  _axios.default.get('http://127.0.0.1:3000/users/getAllUsers').then(function (data) {
     usernames = data.data.users.map(function (user) {
       return user.username;
     });
@@ -9047,13 +9047,19 @@ registerButton.addEventListener('click', /*#__PURE__*/function () {
             username = usernameValidator.usernameField.value;
             email = emailValidator.emailField.value;
             password = passwordValidator.passwordField.value;
-            repeatPassword = passwordValidator.repeatPasswordField.value; // if (checkForError()) {
-            //     showAlert('error', msg, 2);
-            //     return;
-            // }
+            repeatPassword = passwordValidator.repeatPasswordField.value;
 
-            _context.prev = 5;
-            _context.next = 8;
+            if (!checkForError()) {
+              _context.next = 8;
+              break;
+            }
+
+            (0, _alerts.showAlert)('error', msg, 2);
+            return _context.abrupt("return");
+
+          case 8:
+            _context.prev = 8;
+            _context.next = 11;
             return (0, _axios.default)({
               method: 'post',
               url: 'http://127.0.0.1:3000',
@@ -9065,7 +9071,7 @@ registerButton.addEventListener('click', /*#__PURE__*/function () {
               }
             });
 
-          case 8:
+          case 11:
             res = _context.sent;
 
             if (res.data.status === 'success') {
@@ -9075,20 +9081,20 @@ registerButton.addEventListener('click', /*#__PURE__*/function () {
             window.setTimeout(function () {
               location.assign('/');
             }, 1500);
-            _context.next = 16;
+            _context.next = 19;
             break;
 
-          case 13:
-            _context.prev = 13;
-            _context.t0 = _context["catch"](5);
+          case 16:
+            _context.prev = 16;
+            _context.t0 = _context["catch"](8);
             (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
-          case 16:
+          case 19:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[5, 13]]);
+    }, _callee, null, [[8, 16]]);
   }));
 
   return function (_x) {
@@ -9183,7 +9189,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54046" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61070" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

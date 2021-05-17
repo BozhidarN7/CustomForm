@@ -61,7 +61,6 @@ const arePasswordsSame = (data) => {
 };
 
 const isPasswordSpecified = (data) => {
-    console.log(data);
     if (data.password === '') {
         return false;
     }

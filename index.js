@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.post('/', registerController.register);
 
-app.get('/users/getAll', async (req, res) => {
+app.get('/users/getAllUsers', async (req, res) => {
     const users = await User.find({}, { username: 1, _id: 0 });
     res.status(200).json({
         status: 'success',

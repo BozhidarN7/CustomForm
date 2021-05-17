@@ -7,7 +7,7 @@ const usernameForbiddenSymbols = ['$', '/', '<', '>', '%', '&', '*'];
 let usernames = [];
 
 (function () {
-    axios.get('http://127.0.0.1:3000/users/getAll').then((data) => {
+    axios.get('http://127.0.0.1:3000/users/getAllUsers').then((data) => {
         usernames = data.data.users.map((user) => user.username);
     });
 })();
